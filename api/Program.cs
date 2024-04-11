@@ -11,6 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddControllers().AddNewtonsoftJson(options => {
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -18,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 builder.Services.AddScoped<IUserRepository , UserRepository>();
 builder.Services.AddScoped<IMassionRepository, MassionRepository>();
 builder.Services.AddScoped<ISubMassionRepository , SubMassionRepository>();
+builder.Services.AddScoped<ITagRepository , TagRepository>();
 
 var app = builder.Build();
 

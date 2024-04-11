@@ -17,6 +17,19 @@ namespace api.Repositories
         {
             _context = context;
         }
+
+        public async Task<Massion?> AddTag(int mId, int tId)
+        {
+            var massion = await _context.Massions.FindAsync(mId);
+            var tag = await _context.Tags.FindAsync(tId);
+            if(massion == null || tag == null){
+                return null;
+            }
+            massion.Tags.Add(tag);
+            await _context.SaveChangesAsync();
+            return massion;
+        }
+
         public async Task<Massion> Create(Massion massion)
         {
             await _context.Massions.AddAsync(massion);
@@ -35,14 +48,26 @@ namespace api.Repositories
             return massion;
         }
 
+        public async Task<Massion?> DeleteTag(int mId, int tId)
+        {
+            var masionRes = await _context.Massions.Include(m => m.Tags).FirstOrDefaultAsync(m => m.Id == mId);
+            var tagRes = await _context.Tags.FindAsync(tId);
+            if(masionRes == null || tagRes == null){
+                return null;
+            }
+            masionRes.Tags.Remove(tagRes);
+            await _context.SaveChangesAsync();
+            return masionRes;
+        }
+
         public async Task<List<Massion>> GetAll()
         {
-            return await _context.Massions.Include(m=>m.SubMissions).ToListAsync();
+            return await _context.Massions.Include(m=>m.SubMissions).Include(m=>m.Tags).ToListAsync();
         }
 
         public async Task<Massion?> GetById(int id)
         {
-            var massion = await _context.Massions.Include(m=>m.SubMissions).FirstOrDefaultAsync(m => m.Id == id);
+            var massion = await _context.Massions.Include(m=>m.SubMissions).Include(m=>m.Tags).FirstOrDefaultAsync(m => m.Id == id);
             if(massion == null){
                 return null;
             }

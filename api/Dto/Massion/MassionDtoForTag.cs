@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Dto.Submassion;
-using api.Dto.Tag;
 using api.Models;
 
 namespace api.Dto.Massion
 {
-    public class MassionDto
+    public class MassionDtoForTag
     {
-        public int Id {get;set;}
+         public int Id {get;set;}
 
         public string Title {get;set;} = string.Empty;
 
@@ -27,7 +26,5 @@ namespace api.Dto.Massion
         public int? UserId {get;set;}
 
         public List<SubMassionDto> SubMissions {get;set;} = new List<SubMassionDto>();
-
-        public List<TagDtoForMassion> Tags {get;set;} = new List<TagDtoForMassion>();
     }
 }

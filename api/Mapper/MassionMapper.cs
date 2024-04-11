@@ -19,7 +19,8 @@ namespace api.Mapper
                 Priority = massionModel.Priority,
                 Status = massionModel.Status,
                 UserId = massionModel.UserId,
-                SubMissions = massionModel.SubMissions.Select(s => s.ToSubMassionDto()).ToList()
+                SubMissions = massionModel.SubMissions.Select(s => s.ToSubMassionDto()).ToList(),
+                Tags = massionModel.Tags.Select(t => t.ToTagDtoForMassion()).ToList()
             };
         }
 
@@ -41,6 +42,20 @@ namespace api.Mapper
                 DueAt = massionDto.DueAt,
                 Priority = massionDto.Priority,
                 Status = massionDto.Status
+            };
+        }
+
+        public static MassionDtoForTag ToMassionDtoForTag(this Massion massionModel){
+            return new MassionDtoForTag{
+                Id = massionModel.Id,
+                Title = massionModel.Title,
+                Description = massionModel.Description,
+                CreatedAt = massionModel.CreatedAt,
+                DueAt = massionModel.DueAt,
+                Priority = massionModel.Priority,
+                Status = massionModel.Status,
+                UserId = massionModel.UserId,
+                SubMissions = massionModel.SubMissions.Select(s=>s.ToSubMassionDto()).ToList()
             };
         }
     }

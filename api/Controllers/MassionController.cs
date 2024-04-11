@@ -71,5 +71,25 @@ namespace api.Controllers
             }
             return Ok(massion.ToMassionDto());
         }
+
+        [HttpPost]
+        [Route("{mId}/{tId}")]
+        public async Task<IActionResult> AddTag([FromRoute] int mId , [FromRoute] int tId){
+            var massionRes = await _massionRepo.AddTag(mId , tId);
+            if(massionRes == null){
+                return NotFound();
+            }
+            return Ok(massionRes.ToMassionDto());
+        }
+
+        [HttpDelete]
+        [Route("{mId}/{tId}")]
+        public async Task<IActionResult> DeleteTag([FromRoute] int mId , [FromRoute] int tId){
+            var massionRes = await _massionRepo.DeleteTag(mId , tId);
+            if(massionRes == null){
+                return NotFound();
+            }
+            return Ok(massionRes.ToMassionDto());
+        }
     }
 }
