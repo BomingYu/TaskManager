@@ -16,5 +16,6 @@ namespace api.Interfaces
         Task <Massion?> Update(int id , Massion massion);
 
         Task <Massion?> Delete (int id);
+        Task<bool> IsMassionExist(int id);
     }
 }

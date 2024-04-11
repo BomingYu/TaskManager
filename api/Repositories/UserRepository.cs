@@ -28,12 +28,12 @@ namespace api.Repositories
 
         public async Task<List<User>> GetAll()
         {
-            return await _context.Users.Include(u=>u.Massions).ToListAsync();
+            return await _context.Users.Include(u=>u.Massions).ThenInclude(m=>m.SubMissions).ToListAsync();
         }
 
         public async Task<User?> GetById(int id)
         {
-            var user = await _context.Users.Include(u=>u.Massions).FirstOrDefaultAsync(u=>u.Id == id);
+            var user = await _context.Users.Include(u=>u.Massions).ThenInclude(m=>m.SubMissions).FirstOrDefaultAsync(u=>u.Id == id);
             if(user == null){
                 return null;
             }

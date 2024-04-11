@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Dto.Submassion;
+using api.Models;
 
 namespace api.Dto.Massion
 {
@@ -23,9 +25,7 @@ namespace api.Dto.Massion
 
         public int? UserId {get;set;}
 
-        //public User? User {get;set;}
-
-        //public List<SubMassion> SubMissions {get;set;} = new List<SubMassion>();
+        public List<SubMassionDto> SubMissions {get;set;} = new List<SubMassionDto>();
 
         //public List<Tag> Tags {get;set;} = new List<Tag>();
     }

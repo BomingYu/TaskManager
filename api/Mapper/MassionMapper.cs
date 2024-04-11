@@ -18,7 +18,8 @@ namespace api.Mapper
                 DueAt = massionModel.DueAt,
                 Priority = massionModel.Priority,
                 Status = massionModel.Status,
-                UserId = massionModel.UserId
+                UserId = massionModel.UserId,
+                SubMissions = massionModel.SubMissions.Select(s => s.ToSubMassionDto()).ToList()
             };
         }
 

@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 
 builder.Services.AddScoped<IUserRepository , UserRepository>();
 builder.Services.AddScoped<IMassionRepository, MassionRepository>();
+builder.Services.AddScoped<ISubMassionRepository , SubMassionRepository>();
 
 var app = builder.Build();
 

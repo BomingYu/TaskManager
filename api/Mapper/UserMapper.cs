@@ -16,7 +16,7 @@ namespace api.Mapper
                 Email = userModel.Email,
                 //Password = userModel.Password,
                 CreatedAt = userModel.CreatedAt,
-                Massions = userModel.Massions.Select(c => c.ToMassionDto()).ToList()
+                Massions = userModel.Massions.Select(m => m.ToMassionDto()).ToList()
             };
         } 
     }

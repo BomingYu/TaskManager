@@ -37,16 +37,25 @@ namespace api.Repositories
 
         public async Task<List<Massion>> GetAll()
         {
-            return await _context.Massions.ToListAsync();
+            return await _context.Massions.Include(m=>m.SubMissions).ToListAsync();
         }
 
         public async Task<Massion?> GetById(int id)
         {
-            var massion = await _context.Massions.FindAsync(id);
+            var massion = await _context.Massions.Include(m=>m.SubMissions).FirstOrDefaultAsync(m => m.Id == id);
             if(massion == null){
                 return null;
             }
             return massion;
+        }
+
+        public async Task<bool> IsMassionExist(int id)
+        {
+            var massion = await _context.Massions.FindAsync(id);
+            if(massion == null){
+                return false;
+            }
+            return true;
         }
 
         public async Task<Massion?> Update(int id, Massion massion)
