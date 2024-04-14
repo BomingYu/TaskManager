@@ -140,3 +140,5 @@
 /Users/bomingyu/Desktop/OutOfClass/ASP/TaskManager/api/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /Users/bomingyu/Desktop/OutOfClass/ASP/TaskManager/api/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/bomingyu/Desktop/OutOfClass/ASP/TaskManager/api/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll
+/Users/bomingyu/Desktop/OutOfClass/ASP/TaskManager/api/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/bomingyu/Desktop/OutOfClass/ASP/TaskManager/api/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

@@ -20,7 +20,8 @@ namespace api.Repositories
         public async Task<bool> Existed(int id)
         {
             var user = await _context.Users.FindAsync(id);
-            if(user == null){
+            if (user == null)
+            {
                 return false;
             }
             return true;
@@ -28,13 +29,14 @@ namespace api.Repositories
 
         public async Task<List<User>> GetAll()
         {
-            return await _context.Users.Include(u=>u.Massions).ThenInclude(m=>m.SubMissions).Include(u=>u.Massions).ThenInclude(m=>m.Tags).ToListAsync();
+            return await _context.Users.Include(u => u.Massions).ThenInclude(m => m.SubMissions).Include(u => u.Massions).ThenInclude(m => m.Tags).ToListAsync();
         }
 
         public async Task<User?> GetById(int id)
         {
-            var user = await _context.Users.Include(u=>u.Massions).ThenInclude(m=>m.SubMissions).Include(u=>u.Massions).ThenInclude(m=>m.Tags).FirstOrDefaultAsync(u=>u.Id == id);
-            if(user == null){
+            var user = await _context.Users.Include(u => u.Massions).ThenInclude(m => m.SubMissions).Include(u => u.Massions).ThenInclude(m => m.Tags).FirstOrDefaultAsync(u => u.Id == id);
+            if (user == null)
+            {
                 return null;
             }
             return user;

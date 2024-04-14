@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Dto.Massion;
 using api.Interfaces;
 using api.Mapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -23,6 +24,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllMassion(){
             var massionList = await _massionRepo.GetAll();
             var massionDtoList = massionList.Select(m => m.ToMassionDto());
