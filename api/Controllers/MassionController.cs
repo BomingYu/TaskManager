@@ -47,6 +47,14 @@ namespace api.Controllers
             return Ok(massionRes.ToMassionDto());
         }
 
+        [HttpGet]
+        [Route("user/{uid}")]
+        public async Task<IActionResult> GetMassionByUser ([FromRoute] string uid){
+            var massionsRes = await _massionRepo.GetMassionsByUser(uid);
+            var massionDtoList = massionsRes.Select(m => m.ToMassionDto()).ToList();
+            return Ok(massionDtoList);
+        }
+
         [HttpPost]
         [Route("{id}")]
         public async Task<IActionResult> CreateNewMassion([FromRoute] string id , [FromBody] MassionCreateDto massionDto){

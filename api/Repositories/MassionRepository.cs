@@ -74,6 +74,12 @@ namespace api.Repositories
             return massion;
         }
 
+        public async Task<List<Massion>> GetMassionsByUser(string uid)
+        {
+            var massions = await _context.Massions.Where(m => m.UserId == uid).ToListAsync();
+            return massions;
+        }
+
         public async Task<bool> IsMassionExist(int id)
         {
             var massion = await _context.Massions.FindAsync(id);
