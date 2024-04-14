@@ -24,7 +24,7 @@ namespace api.Mapper
             };
         }
 
-        public static Massion ToMassionFromCreateDto(this MassionCreateDto massionDto , int userId){
+        public static Massion ToMassionFromCreateDto(this MassionCreateDto massionDto , string userId){
             return new Massion{
                 Title = massionDto.Title,
                 Description = massionDto.Description,

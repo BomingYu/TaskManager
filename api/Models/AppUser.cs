@@ -9,5 +9,6 @@ namespace api.Models
     public class AppUser:IdentityUser
     {
         public string Role {get;set;} = string.Empty;
+        public List<Massion> Massions {get;set;} = new List<Massion>();
     }
 }

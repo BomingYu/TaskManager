@@ -66,13 +66,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2d9b544d-9a0e-4cd2-a6fb-98e09facd993",
+                            Id = "fbbb4e48-f394-476c-babd-5e38883be794",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3f0c54f9-ad3a-45fe-a209-d9653d3940b6",
+                            Id = "ac9d4978-24a3-4274-9182-773f773f1679",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -282,12 +282,17 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("UserId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Massions");
                 });
@@ -442,9 +447,13 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.Massion", b =>
                 {
-                    b.HasOne("api.Models.User", "User")
-                        .WithMany("Massions")
+                    b.HasOne("api.Models.AppUser", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.HasOne("api.Models.User", null)
+                        .WithMany("Massions")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("User");
                 });

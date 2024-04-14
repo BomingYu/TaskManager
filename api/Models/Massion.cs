@@ -21,9 +21,9 @@ namespace api.Models
 
         public string Status {get;set;} = string.Empty;
 
-        public int? UserId {get;set;}
+        public string? UserId {get;set;}
 
-        public User? User {get;set;}
+        public AppUser? User {get;set;}
 
         public List<SubMassion> SubMissions {get;set;} = new List<SubMassion>();
 

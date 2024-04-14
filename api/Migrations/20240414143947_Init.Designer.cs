@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240414104650_Identity")]
-    partial class Identity
+    [Migration("20240414143947_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,13 +69,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "24c7ae49-0df6-4701-82c7-7939b09604ae",
+                            Id = "fbbb4e48-f394-476c-babd-5e38883be794",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "cd994d24-c227-44ce-8faf-d9264b4ada28",
+                            Id = "ac9d4978-24a3-4274-9182-773f773f1679",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -229,6 +229,10 @@ namespace api.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -281,12 +285,17 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("UserId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Massions");
                 });
@@ -441,9 +450,13 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.Massion", b =>
                 {
-                    b.HasOne("api.Models.User", "User")
-                        .WithMany("Massions")
+                    b.HasOne("api.Models.AppUser", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.HasOne("api.Models.User", null)
+                        .WithMany("Massions")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("User");
                 });

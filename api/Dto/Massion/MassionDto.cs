@@ -24,7 +24,7 @@ namespace api.Dto.Massion
 
         public string Status {get;set;} = string.Empty;
 
-        public int? UserId {get;set;}
+        public string? UserId {get;set;}
 
         public List<SubMassionDto> SubMissions {get;set;} = new List<SubMassionDto>();
 

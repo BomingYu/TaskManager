@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Dto.Account;
 using api.Dto.User;
 using api.Interfaces;
+using api.Mapper;
 using api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -87,6 +88,12 @@ namespace api.Controllers
                     Token = _tokenService.CreateToken(user)
                 }
             );
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers(){
+            var users = await _userManager.Users.Include(u=>u.Massions).ToListAsync();
+            var userDto = users.Select(u=>u.ToUserDtoForMassion());
+            return Ok(userDto);
         }
     }
 }

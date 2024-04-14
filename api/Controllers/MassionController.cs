@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using api.Dto.Massion;
 using api.Interfaces;
 using api.Mapper;
+using api.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -17,10 +20,13 @@ namespace api.Controllers
         private readonly IMassionRepository _massionRepo;
         private readonly IUserRepository _userRepo;
 
-        public MassionController(IMassionRepository massionRepo , IUserRepository userRepo)
+        private readonly UserManager<AppUser> _userManager;
+
+        public MassionController(IMassionRepository massionRepo , IUserRepository userRepo , UserManager<AppUser> userManager)
         {
             _massionRepo = massionRepo;
             _userRepo = userRepo;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -43,9 +49,10 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("{id}")]
-        public async Task<IActionResult> CreateNewMassion([FromRoute] int id , [FromBody] MassionCreateDto massionDto){
-            var userExist = await _userRepo.Existed(id);
-            if(!userExist){
+        public async Task<IActionResult> CreateNewMassion([FromRoute] string id , [FromBody] MassionCreateDto massionDto){
+            //var userExist1 = await _userRepo.Existed(id);
+            var userExist = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if(userExist == null){
                 return NotFound();
             }
             var massionModel = massionDto.ToMassionFromCreateDto(id);
