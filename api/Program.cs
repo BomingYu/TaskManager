@@ -10,6 +10,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+//Add this for cors protection / and add a down to the bottom
+builder.Services.AddCors(p=>p.AddPolicy("MyCorsPolicy",build => {
+    build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+}));
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -98,6 +102,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//CORS protection
+app.UseCors("MyCorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
